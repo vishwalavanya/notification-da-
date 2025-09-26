@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Message Tester</title>
+</head>
+<body>
+  <h2>Send Message from Ammu to Vishwa</h2>
+  <button onclick="goOffline()">Set Vishwa Offline</button>
+  <button onclick="sendMessage()">Send Message</button>
+
+  <script>
+    function goOffline() {
+      fetch("/status", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user: "vishwa", status: "offline" })
+      }).then(res => alert("Vishwa set to offline"));
+    }
+
+    function sendMessage() {
+      fetch("/message", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          from: "ammu",
+          to: "vishwa",
+          message: "Hey Vishwa, this is a frontend test! 📩"
+        })
+      }).then(res => alert("Message sent. Check your email!"));
+    }
+  </script>
+</body>
+</html>
